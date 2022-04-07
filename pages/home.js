@@ -1,26 +1,33 @@
-// import { Link } from "@mui/material";
 import Head from "next/head";
 import Header from "../components/Header";
-import styles from "../styles/Home.module.css";
-import Login from "./login";
 import Post from "../components/Post";
-import Button from "../components/button";
+import Sidebar from "../components/sidebar";
+import { Flex, Spacer, VStack, StackDivider } from "@chakra-ui/react";
+import React from "react";
+import PostBox from "../components/PostBox";
 
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>Kaktus</title>
+        <title>BeanBean</title>
       </Head>
       <Header />
       <main className="flex align-middle justify-center ">
         {/* sidebar */}
-        asade
+        <Sidebar />
         {/* feed */}
-        <Post />
+        <VStack>
+          <PostBox />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </VStack>
         {/* widgets */}
-        <Button url="/login" name="Login" />
-        <Button url="/register" name="Register" />
       </main>
     </div>
   );

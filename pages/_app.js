@@ -1,5 +1,6 @@
 // // import { Provider } from "next-auth/client";
 import "../styles/globals.css";
+import { store } from "./../redux/reducers";
 
 // function MyApp({ Component, pageProps }) {
 //   return (
@@ -13,12 +14,15 @@ import "../styles/globals.css";
 // export default MyApp;
 
 import { ChakraProvider } from "@chakra-ui/react";
+import { Provider } from "react-redux";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </Provider>
   );
 }
 

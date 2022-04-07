@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Button = ({ url, name }) => {
+const ButtonDir = ({ url, name }) => {
   return (
     <Link href={url}>
       <a>{name}</a>
@@ -8,4 +8,4 @@ const Button = ({ url, name }) => {
   );
 };
 
-export default Button;
+export default ButtonDir;

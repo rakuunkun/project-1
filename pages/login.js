@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
-import { useFormik, Formik, Form, Field } from "formik";
+import { useFormik } from "formik";
+import { connect, useSelector } from "react-redux";
+import { loginAction } from "../redux/actions";
 import {
   Box,
   Button,
@@ -11,43 +12,26 @@ import {
   Input,
   VStack,
   Text,
-  InputGroup,
-  InputRightElement,
-  IconButton,
   FormErrorMessage,
+  column,
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+// import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import * as Yup from "yup";
-// const CssTextField = styled(TextField)({
-//   "& label.Mui-focused": {
-//     color: "#D84727",
-//   },
-//   "& .MuiInput-underline:after": {
-//     borderBottomColor: "#D84727",
-//   },
-//   "& .MuiOutlinedInput-root": {
-//     "& fieldset": {},
-//     "&:hover fieldset": {
-//       borderColor: "#D84727",
-//     },
-//     "&.Mui-focused fieldset": {
-//       borderColor: "#D84727",
-//     },
-//   },
-// });
+import ButtonDir from "../components/button";
 
 const loginSchema = Yup.object({
   username: Yup.string().matches(
-    /^(?:[A-Z\d][A-Z\d_-]{5,10}|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})$/i,
+    /^(?:[A-Z\d][A-Z\d_-]{4,10}|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})$/i,
     // /hi/,
-    { excludeEmptyString: true, message: "format username atau email salah" }
+    { excludeEmptyString: true, message: "Format username atau email salah" }
   ),
 });
 
-const Login = () => {
-  const [pesanError, setPesanError] = useState("");
+const Login = ({ loginAction }) => {
   const router = useRouter();
+
   // form validation
+  const { error_mes } = useSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
       // email: "",
@@ -57,15 +41,7 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      if (
-        (values.username === "ampuh@gmail.com" ||
-          values.username === "ampuhh") &&
-        values.password === "ganteng123"
-      ) {
-        router.replace("/");
-      } else {
-        setPesanError("Username or Password is Incorrect!");
-      }
+      loginAction(values, router);
     },
   });
   const isButtonDisabled =
@@ -73,7 +49,7 @@ const Login = () => {
 
   return (
     <Flex bg="gray.100" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md">
+      <Box bg="white" p={6} rounded="md" flexDir={column}>
         <form onSubmit={formik.handleSubmit}>
           <VStack spacing={4} align="flex-start">
             <FormControl
@@ -89,6 +65,7 @@ const Login = () => {
                 variant="filled"
                 onChange={formik.handleChange}
                 value={formik.values.username}
+                placeholder="Username or Email"
               />
               <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
             </FormControl>
@@ -101,11 +78,12 @@ const Login = () => {
                 variant="filled"
                 onChange={formik.handleChange}
                 value={formik.values.password}
+                placeholder="Password"
               />
             </FormControl>
             {/* <Box> */}
             <Text fontSize="sm" color="tomato" py="-2">
-              {pesanError}
+              {error_mes}
             </Text>
             {/* </Box> */}
             <Checkbox
@@ -119,7 +97,7 @@ const Login = () => {
             </Checkbox>
             <Button
               type="submit"
-              colorScheme="messenger"
+              colorScheme="red"
               isFullWidth
               isDisabled={isButtonDisabled}
             >
@@ -127,8 +105,11 @@ const Login = () => {
             </Button>
           </VStack>
         </form>
+        <div className="text-center  text-sky-600 my-2">
+          <ButtonDir url="/register" name="Create New Account" />
+        </div>
       </Box>
     </Flex>
   );
 };
-export default Login;
+export default connect(null, { loginAction })(Login);
