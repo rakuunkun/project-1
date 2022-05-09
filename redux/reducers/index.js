@@ -1,4 +1,3 @@
-import { composeWithDevTools } from "@redux-devtools/extension";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import loadingReducers from "./loadingReducers";
@@ -12,7 +11,4 @@ const reducers = combineReducers({
 // thunk utk menjalankan action secara async
 const middlewares = [thunk];
 
-export const store = createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware(...middlewares))
-);
+export const store = createStore(reducers, applyMiddleware(...middlewares));

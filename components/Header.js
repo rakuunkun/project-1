@@ -27,7 +27,7 @@ import { connect, useSelector } from "react-redux";
 const Header = ({ logoutAction }) => {
   const router = useRouter();
   // memanggil user yang ad di redux
-  const { username } = useSelector((state) => state.user);
+  const { username, profilePic } = useSelector((state) => state.user);
   return (
     <div className="flex sticky top-0 z-100 bg-white items-center p-0 lg:px-5 shadow-md">
       {/* left */}
@@ -58,8 +58,8 @@ const Header = ({ logoutAction }) => {
             <Avatar
               className="mr-2"
               size="sm"
-              name="Dan Abrahmov"
-              src="https://bit.ly/dan-abramov"
+              name=""
+              src={`http://localhost:5000/${profilePic}`}
             />
           </WrapItem>
         </Wrap>

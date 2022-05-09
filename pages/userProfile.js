@@ -5,24 +5,19 @@ import Sidebar from "../components/sidebar";
 import { Flex, Spacer, VStack, StackDivider } from "@chakra-ui/react";
 import React from "react";
 import PostBox from "../components/PostBox";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { API_URL } from "../helpers/api_url";
+import Profile from "../components/Profile";
+import useUser from "../hooks/useUser";
 
-export default function Home() {
-  const [data, setState] = useState([]);
-  const fetchPost = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/post/getpost`);
-      setState(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
+export default function userProfile() {
+  const {
+    username,
+    fullname,
+    bio,
+    profilePic,
+    birthDate,
+    createdAt,
+    isVerified,
+  } = useUser();
 
   return (
     <div>
@@ -35,10 +30,16 @@ export default function Home() {
         <Sidebar />
         {/* feed */}
         <VStack>
-          <PostBox />
-          <Post data={data} />
+          <Profile
+            username={username}
+            fullname={fullname}
+            bio={bio}
+            profilePic={profilePic}
+            birthDate={birthDate}
+            createdAt={createdAt}
+            isVerified={isVerified}
+          />
         </VStack>
-        {/* widgets */}
       </main>
     </div>
   );

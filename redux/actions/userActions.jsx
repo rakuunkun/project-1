@@ -24,9 +24,52 @@ export const loginAction = ({ username, password }, router) => {
       dispatch({ type: "LOGIN", payload: res.data });
 
       // set cookies for nextjs
-      Cookies.set("token", res.headers["x-access-token"]);
+      Cookies.set("token", res.headers["x-token-access"]);
       router.push("/home");
       toast.success("berhasil Login", {
+        position: "top-right",
+        autoClose: 3000,
+        closeOnClick: true,
+        draggable: true,
+      });
+    } catch (error) {
+      console.log(error.response);
+      toast.error(error.response.data.message || "error server", {
+        position: "top-right",
+        autoClose: 3000,
+        closeOnClick: true,
+        draggable: true,
+      });
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.message || "network error",
+      });
+    } finally {
+      dispatch({ type: "DONE" });
+    }
+  };
+};
+
+export const registerAction = (
+  { username, email, password, fullname, birthDate },
+  router
+) => {
+  return async (dispatch) => {
+    try {
+      let res = await axios.post(`${API_URL}/auth/register`, {
+        username,
+        email,
+        password,
+        fullname,
+        birthDate,
+      });
+      console.log(res.data);
+      dispatch({ type: "REGISTER", payload: res.data });
+
+      // set cookies for nextjs
+      // Cookies.set("token", res.headers["x-access-token"]);
+      router.push("/verify");
+      toast.success("berhasil Register", {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
