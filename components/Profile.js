@@ -4,15 +4,7 @@ import { FiShare2 } from "react-icons/fi";
 import { IconButton } from "@chakra-ui/react";
 import PostIcon from "./postIcon";
 import Post from "../components/Post";
-const Profile = ({
-  username,
-  fullname,
-  bio,
-  profilePic,
-  birthDate,
-  createdAt,
-  isVerified,
-}) => {
+const Profile = ({ username, fullname, bio, profilePic }) => {
   return (
     <div className="flex flex-col">
       <div className="p-5 bg-white mt-5 rounded-t-2xl shadow-xl min-w-[45vh] ">
@@ -35,7 +27,7 @@ const Profile = ({
       </div>
       {/* footer */}
 
-      <Post />
+      {/* <Post /> */}
     </div>
   );
 };
