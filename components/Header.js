@@ -20,16 +20,16 @@ import Image from "next/image";
 import HeaderIcon from "./HeaderIcon";
 import { BsChatDots } from "react-icons/bs";
 import { FiBell, FiChevronDown } from "react-icons/fi";
-import { logoutAction } from "../redux/actions";
+import { logoutAction, profileAction, homeAction } from "../redux/actions";
 import { useRouter } from "next/router";
 import { connect, useSelector } from "react-redux";
 
-const Header = ({ logoutAction }) => {
+const Header = ({ logoutAction, profileAction }) => {
   const router = useRouter();
   // memanggil user yang ad di redux
   const { username, profilePic } = useSelector((state) => state.user);
   return (
-    <div className="flex sticky top-0 z-100 bg-white items-center p-0 lg:px-5 shadow-md">
+    <div className="flex sticky top-0 z-50 bg-white items-center p-0 lg:px-5 shadow-md">
       {/* left */}
       <div className="flex items-center">
         <Image src="/mainlogo.png" width={40} height={40} layout="fixed" />
@@ -45,17 +45,22 @@ const Header = ({ logoutAction }) => {
       {/* center */}
       <div className="flex justify-center flex-grow">
         <div className="flex space-x-6 md:space-x-2">
-          <HeaderIcon active Icon={HomeIcon} />
+          <HeaderIcon
+            onClick={() => homeAction(router)}
+            active
+            Icon={HomeIcon}
+          />
           <HeaderIcon Icon={FlagIcon} />
           <HeaderIcon Icon={PlayIcon} />
           <HeaderIcon Icon={UserGroupIcon} />
         </div>
       </div>
       {/* right */}
-      <div className="flex items-center sm:space-x-2 justify-end">
+      <div className="flex items-center sm:space-x-2 justify-end cursor-pointer">
         <Wrap>
           <WrapItem>
             <Avatar
+              onClick={() => profileAction(router)}
               className="mr-2"
               size="sm"
               name=""
@@ -63,7 +68,12 @@ const Header = ({ logoutAction }) => {
             />
           </WrapItem>
         </Wrap>
-        <p className="whtitespace-nowrap font-semibold pr-3">{username}</p>
+        <p
+          onClick={() => profileAction(router)}
+          className="whtitespace-nowrap font-semibold pr-3"
+        >
+          {username}
+        </p>
         <Menu>
           <MenuButton
             as={IconButton}
@@ -76,11 +86,7 @@ const Header = ({ logoutAction }) => {
             Actions
           </MenuButton>
           <MenuList>
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>Setting & Privacy</MenuItem>
-            <MenuItem>Help & Support</MenuItem>
-            <MenuDivider />
-            <MenuItem>Log Out</MenuItem>
+            <MenuItem>Chat</MenuItem>
           </MenuList>
         </Menu>
         <Menu>
@@ -110,7 +116,7 @@ const Header = ({ logoutAction }) => {
             Actions
           </MenuButton>
           <MenuList>
-            <MenuItem>Profile</MenuItem>
+            <MenuItem onClick={() => profileAction(router)}>Profile</MenuItem>
             <MenuItem>Setting & Privacy</MenuItem>
             <MenuItem>Help & Support</MenuItem>
             <MenuDivider />
@@ -121,5 +127,6 @@ const Header = ({ logoutAction }) => {
     </div>
   );
 };
-
-export default connect(null, { logoutAction })(Header);
+export default connect(null, { logoutAction, profileAction, homeAction })(
+  Header
+);

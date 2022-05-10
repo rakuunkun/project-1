@@ -1,11 +1,9 @@
-import LeftNavBar from "../../components/leftnavbar";
-import RightBar from "../../components/rightnavbar";
 import useUser from "../../hooks/useUser";
 import Postdetail from "../../components/postdetail";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import API_URL from "../../helpers/apiurl";
+import { API_URL } from "../../helpers/api_url";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
@@ -55,18 +53,19 @@ const Post = () => {
     fetchComments();
   }, []);
 
-  const updatePost = async (formData) => {
+  const updatePost = async (values) => {
     try {
       let token = Cookies.get("token");
       await axios.patch(
         `${API_URL}/post/editpostcaptionimage/${postID}`,
-        formData,
+        values,
         {
           headers: {
             authorization: `Bearer ${token}`,
           },
         }
       );
+
       await fetchDataUserDetail();
     } catch (error) {
       console.log(error);
@@ -136,14 +135,8 @@ const Post = () => {
 
   return (
     <div className="flex">
-      <LeftNavBar
-        username={username}
-        fullname={fullname}
-        profile_picture={profile_picture}
-        isVerified={isVerified}
-      />
       <Postdetail
-        profile_picture={profile_picture}
+        profilePic={profilePic}
         data={data}
         commentsData={commentsData}
         setData={setData}
@@ -157,7 +150,6 @@ const Post = () => {
         deletePost={deletePost}
         addLikes={addLikes}
       />
-      <RightBar />
     </div>
   );
 };

@@ -2,12 +2,12 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Sidebar from "../components/sidebar";
-import { Flex, Spacer, VStack, StackDivider } from "@chakra-ui/react";
-import PostBox from "../components/PostBox";
+import { VStack } from "@chakra-ui/react";
 import Profile from "../components/Profile";
 import useUser from "../hooks/useUser";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { API_URL } from "../helpers/api_url";
 
 export default function userProfile() {
   const {
@@ -55,9 +55,10 @@ export default function userProfile() {
             isVerified={isVerified}
           />
         </VStack>
-
-        <Post data={data} />
       </main>
+      <div className="flex align-middle justify-center ">
+        <Post data={data} />
+      </div>
     </div>
   );
 }

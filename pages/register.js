@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -208,7 +207,7 @@ const Register = ({ registerAction }) => {
         <div className=" mt-2 flex items-center">
           <div>Have an account? </div>
           <div className="text-sky-600">
-            <ButtonDir my-2 url="/login" name="Log in" />
+            <ButtonDir my-2 url="/verify" name="Verify" />
           </div>
         </div>
       </Box>

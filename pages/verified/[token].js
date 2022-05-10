@@ -96,7 +96,7 @@ const Verified = () => {
           Click the button to re -{" "}
           <button
             onClick={sendEmail}
-            className="text-2xl bg-gray-400 pr-3  rounded-full hover:bg-pinksecondary duration-700"
+            className="text-2xl bg-gray-400 pr-3  rounded-full hover: duration-700"
           >
             Verify
           </button>
