@@ -24,16 +24,22 @@ import { logoutAction, profileAction, homeAction } from "../redux/actions";
 import { useRouter } from "next/router";
 import { connect, useSelector } from "react-redux";
 
-const Header = ({ logoutAction, profileAction }) => {
+const Header = ({ logoutAction, profileAction, homeAction }) => {
   const router = useRouter();
   // memanggil user yang ad di redux
   const { username, profilePic } = useSelector((state) => state.user);
   return (
     <div className="flex sticky top-0 z-50 bg-white items-center p-0 lg:px-5 shadow-md">
       {/* left */}
-      <div className="flex items-center">
-        <Image src="/mainlogo.png" width={40} height={40} layout="fixed" />
-        <div className="flex items-center rounded-full ml-3 bg-gray-100 p-2">
+      <div className="flex items-center cursor-pointer">
+        <Image
+          onClick={() => homeAction(router)}
+          src="/mainlogo.png"
+          width={40}
+          height={40}
+          layout="fixed"
+        />
+        <div className=" flex items-center rounded-full ml-3 bg-gray-100 p-2">
           <SearchIcon className="h-6 text-gray-600" />
           <input
             className="flex ml-2 items-center bg-transparent outline-none placeholder-gray-500 flex-shrink"
@@ -44,12 +50,8 @@ const Header = ({ logoutAction, profileAction }) => {
       </div>
       {/* center */}
       <div className="flex justify-center flex-grow">
-        <div className="flex space-x-6 md:space-x-2">
-          <HeaderIcon
-            onClick={() => homeAction(router)}
-            active
-            Icon={HomeIcon}
-          />
+        <div className="flex space-x-6 md:space-x-2 ">
+          <HeaderIcon active Icon={HomeIcon} />
           <HeaderIcon Icon={FlagIcon} />
           <HeaderIcon Icon={PlayIcon} />
           <HeaderIcon Icon={UserGroupIcon} />

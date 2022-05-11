@@ -5,7 +5,7 @@ import { AiFillHeart, AiFillEdit } from "react-icons/ai";
 import { FiShare } from "react-icons/fi";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-import { useDisclosure } from "@chakra-ui/react";
+import { Avatar, useDisclosure } from "@chakra-ui/react";
 import {
   Modal,
   ModalOverlay,
@@ -18,6 +18,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import moment from "moment";
+import Header from "./Header";
 
 const Postdetail = ({
   data,
@@ -77,7 +78,7 @@ const Postdetail = ({
     }
   };
 
-  const inputTwaatHandler = (e) => {
+  const inputPostHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -171,7 +172,7 @@ const Postdetail = ({
       return (
         <div key={index} className="py-4 pl-8 border-b-2 ">
           <div className="flex gap-3 items-center">
-            <img
+            <Avatar
               className="object-cover w-10 h-10 rounded-full"
               src={`${API_URL}${val.profilePic}`}
               alt=""
@@ -190,18 +191,18 @@ const Postdetail = ({
       return (
         <div
           key={index}
-          className="border-b-2 flex pb-4 pl-6 pt-2 hover: duration-700 mt-20"
+          className="border-b-2 flex pb-4 pl-6 pt-2 hover: duration-700 mt-4"
         >
           <div className="min-w-fit">
             <a href="">
               {val.profilePic ? (
-                <img
+                <Avatar
                   src={`${API_URL}${val.profilePic}`}
                   alt=""
                   className="object-cover w-14 h-14 rounded-full"
                 />
               ) : (
-                <img
+                <Avatar
                   src={`${API_URL}/photos/defaultcoverimage.png`}
                   alt=""
                   className="object-cover w-14 h-14 rounded-full"
@@ -209,27 +210,14 @@ const Postdetail = ({
               )}
             </a>
           </div>
-          <div className="text-black flex flex-col pl-3 w-10/12">
+          <div className=" flex flex-col pl-3 w-10/12">
             <div className="flex space-x-2">
               <div>{val.fullname}</div>
               <div>@{val.username}</div>
               {/* <div>- {val.created_at}</div> */}
             </div>
             <div className="pt-2 text-lg">{val.caption}</div>
-            {/* <div className="pt-2 grid grid-cols-2 gap-2">
-              {val.photos
-                ? val.photos.map((val1, index1) => {
-                    return (
-                      <div className="" key={index1}>
-                        <img
-                          className="rounded-xl object-cover w-full h-40"
-                          src={`${API_URL}${val1.image}`}
-                        ></img>
-                      </div>
-                    );
-                  })
-                : null}
-            </div> */}
+
             <div className="pt-2 text-lg pr-6"></div>
             <div className="pt-4 flex justify-between items-center h-4">
               {username == val.username ? (
@@ -283,14 +271,12 @@ const Postdetail = ({
   };
 
   return (
-    <div className="bg-white min-h-screen w-5/12 relative text-black ">
-      <div className="bg-white bg-opacity-70 backdrop-blur-md fixed top-0 pl-6 py-6 w-5/12 z-10 text-2xl">
-        Post
-      </div>
+    <div>
+      <Header />
       {renderData()}
       <div className="pl-8 pt-4 border-b-2  pb-4">
         <div className="flex items-center gap-3">
-          <img
+          <Avatar
             className="object-cover w-10 h-10 rounded-full"
             src={`${API_URL}${profilePic}`}
             alt=""
@@ -303,7 +289,7 @@ const Postdetail = ({
               disabled
               onChange={inputCommentHandler}
               value={inputComment.comment}
-              className="resize-none bg-white text-black focus:outline-none pt-1"
+              className="resize-none bg-white  focus:outline-none pt-1"
               name="comment"
               rows="1"
               cols="48"
@@ -313,7 +299,7 @@ const Postdetail = ({
             <textarea
               onChange={inputCommentHandler}
               value={inputComment.comment}
-              className="resize-none bg-white text-black focus:outline-none pt-1"
+              className="resize-none bg-white focus:outline-none pt-1"
               name="comment"
               rows="1"
               cols="48"
@@ -325,14 +311,14 @@ const Postdetail = ({
             <button
               disabled
               onClick={submitComment}
-              className=" text-black rounded-full py-2 mr-8 px-3 text-base"
+              className="  rounded-full py-2 mr-8 px-3 text-base"
             >
               Reply
             </button>
           ) : (
             <button
               onClick={submitComment}
-              className=" text-black rounded-full py-2 mr-8 px-3 text-base hover: duration-700"
+              className="  rounded-full py-2 mr-8 px-3 text-base hover: duration-700"
             >
               Reply
             </button>
@@ -343,7 +329,7 @@ const Postdetail = ({
 
         {inputComment.comment.length > 0 &&
         inputComment.comment.length <= 300 ? (
-          <div className="text-black text-sm">{characters} / 300</div>
+          <div className=" text-sm">{characters} / 300</div>
         ) : null}
 
         {inputComment.comment.length > 300 ? (
@@ -378,7 +364,7 @@ const Postdetail = ({
           <ModalContent>
             <ModalHeader bg="" display="flex" justifyContent="space-between">
               <button
-                className="bg- rounded-full py-2 px-3 text-base text-black hover: duration-700"
+                className="bg- rounded-full py-2 px-3 text-base  hover: duration-700"
                 onClick={onClose}
                 type="button"
               >
@@ -386,7 +372,7 @@ const Postdetail = ({
               </button>
               <button
                 onClick={onClose}
-                className=" text-black rounded-full py-2 px-3 text-base hover: duration-700"
+                className="  rounded-full py-2 px-3 text-base hover: duration-700"
                 type="submit"
               >
                 Edit Post
@@ -395,16 +381,16 @@ const Postdetail = ({
 
             <ModalBody className=" bg-">
               <div className="flex gap-4">
-                <img
+                <Avatar
                   className="rounded-full w-10 h-10 object-cover"
                   src={`${API_URL}${profilePic}`}
                   alt=""
                 />
                 <textarea
-                  onChange={inputTwaatHandler}
+                  onChange={inputPostHandler}
                   name="caption"
                   value={input.caption}
-                  className="pt-1 focus:outline-none bg- text-black resize-none"
+                  className="pt-1 focus:outline-none bg-  resize-none"
                   cols="36"
                   rows="3"
                   placeholder="What's happening..."
@@ -426,7 +412,7 @@ const Postdetail = ({
                             selectedImage.filter((e) => e !== val)
                           );
                         }}
-                        className="absolute top-1 left-1 p-1 bg- rounded-full bg-opacity-60 text-black hover: hover:bg-opacity-60 duration-500"
+                        className="absolute top-1 left-1 p-1 bg- rounded-full bg-opacity-60  hover: hover:bg-opacity-60 duration-500"
                       >
                         <IoClose />
                       </button>
@@ -438,7 +424,7 @@ const Postdetail = ({
 
             <ModalFooter className="bg-">
               <label
-                className=" text-black rounded-full py-2 px-3 text-base hover: duration-700 cursor-pointer"
+                className="  rounded-full py-2 px-3 text-base hover: duration-700 cursor-pointer"
                 for="inputPic"
               >
                 Add Photos

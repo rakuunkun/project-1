@@ -149,7 +149,7 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
         <ModalOverlay />
 
         <ModalContent>
-          <ModalHeader className=" text-black backdrop-blur-lg flex font-thin items-center w-full gap-4 text-lg">
+          <ModalHeader className="  backdrop-blur-lg flex font-thin items-center w-full gap-4 text-lg">
             <button
               onClick={onClosePhoto}
               type="button"
@@ -212,7 +212,7 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
                 <label
                   for="profilePic"
                   type="button"
-                  className="absolute left-24  text-3xl  hover: hover:cursor-pointer duration-700 rounded-full p-1 bg-opacity-60 text-black"
+                  className="absolute left-24  text-3xl  hover: hover:cursor-pointer duration-700 rounded-full p-1 bg-opacity-60 "
                 >
                   <IoAddCircleOutline />
                 </label>
@@ -227,7 +227,7 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
         <ModalOverlay />
         <form onSubmit={formik.handleSubmit}>
           <ModalContent>
-            <ModalHeader className=" text-black backdrop-blur-lg flex font-thin items-center w-full gap-4 text-lg">
+            <ModalHeader className="  backdrop-blur-lg flex font-thin items-center w-full gap-4 text-lg">
               <button
                 onClick={closeModalEditProfile}
                 type="button"
@@ -257,10 +257,10 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
               )}
             </ModalHeader>
             <ModalBody className="flex flex-col gap-2 ">
-              <div className="text-black w-full p-2 border-2  rounded-xl">
+              <div className=" w-full p-2 border-2  rounded-xl">
                 <div className="text-base">Username</div>
                 <input
-                  className="w-full text-black focus:outline-none  text-xl font-bold tracking-wider"
+                  className="w-full  focus:outline-none  text-xl font-bold tracking-wider"
                   type="text"
                   name="username"
                   onChange={formik.handleChange}
@@ -268,10 +268,10 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
                   value={formik.values.username}
                 />
               </div>
-              <div className="text-black p-2 w-full border-2  rounded-xl">
+              <div className=" p-2 w-full border-2  rounded-xl">
                 <div className="text-base">Fullname</div>
                 <input
-                  className="w-full text-black focus:outline-none  text-xl font-bold tracking-wider"
+                  className="w-full  focus:outline-none  text-xl font-bold tracking-wider"
                   type="text"
                   name="fullname"
                   onChange={formik.handleChange}
@@ -292,10 +292,10 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
                 </p>
               ) : null}
 
-              <div className="text-black w-full p-2 border-2  rounded-xl">
+              <div className=" w-full p-2 border-2  rounded-xl">
                 <div className="text-base">Bio</div>
                 <input
-                  className="w-full text-black focus:outline-none  text-xl font-bold tracking-wider"
+                  className="w-full  focus:outline-none  text-xl font-bold tracking-wider"
                   type="text"
                   name="bio"
                   onChange={formik.handleChange}
