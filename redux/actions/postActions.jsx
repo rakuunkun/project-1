@@ -11,11 +11,6 @@ export const fetchPost = () => {
       console.log(res.data);
       dispatch({ type: "UPDATE_DATA", payload: { data: res.data } });
     } catch (error) {
-      //   Swal.fire({
-      //     icon: "error",
-      //     title: "Oops...",
-      //     text: error.response.data.message || "Network Error",
-      //   });
       console.log(error);
     } finally {
       dispatch({ type: "DONE" });
@@ -34,15 +29,8 @@ export const sendPost = (values) => {
         },
       });
 
-      //   fetchPost();
-
       Swal.fire("Post sent!", "", "success");
     } catch (error) {
-      //   Swal.fire({
-      //     icon: "error",
-      //     title: "Oops...",
-      //     text: error.response.data.message || "Network Error",
-      //   });
       console.log(error);
     } finally {
       dispatch({ type: "DONE" });
