@@ -25,7 +25,6 @@ const Postdetail = ({
   username,
   isVerified,
   profilePic,
-  updatePost,
   deletePost,
   addLikes,
   commentsData,
@@ -57,14 +56,12 @@ const Postdetail = ({
   }, [inputComment]);
 
   const handleClick = async (e) => {
-    // setlikesB(!likesB)
     e.preventDefault();
     try {
       await addLikes();
     } catch (error) {
       console.log(error);
     }
-    // await fetchDataUserDetail()
   };
 
   const [selectedImage, setselectedImage] = useState([]);
@@ -123,13 +120,7 @@ const Postdetail = ({
 
   const submitPost = async (e) => {
     e.preventDefault();
-    // let insertData = {
-    //   caption: input.caption,
-    // };
-
     try {
-      //   await updatePost(insertData);
-
       let token = Cookies.get("token");
       await axios.patch(
         `${API_URL}/post/editpostcaptionimage/${postID}`,
@@ -140,7 +131,6 @@ const Postdetail = ({
           },
         }
       );
-      // await fetchDataUserDetail()
       console.log(input.caption, "ini caption");
       await Swal.fire("Post successfully changed!", "", "success");
 
@@ -196,16 +186,11 @@ const Postdetail = ({
           <div className="min-w-fit">
             <a href="">
               {val.profilePic ? (
-                <Avatar
-                  src={`${API_URL}${val.profilePic}`}
-                  alt=""
-                  className="object-cover w-14 h-14 rounded-full"
-                />
+                <Avatar src={`${API_URL}${val.profilePic}`} alt="" />
               ) : (
                 <Avatar
                   src={`${API_URL}/photos/defaultcoverimage.png`}
                   alt=""
-                  className="object-cover w-14 h-14 rounded-full"
                 />
               )}
             </a>
@@ -214,7 +199,6 @@ const Postdetail = ({
             <div className="flex space-x-2">
               <div>{val.fullname}</div>
               <div>@{val.username}</div>
-              {/* <div>- {val.created_at}</div> */}
             </div>
             <div className="pt-2 text-lg">{val.caption}</div>
 
@@ -276,11 +260,7 @@ const Postdetail = ({
       {renderData()}
       <div className="pl-8 pt-4 border-b-2  pb-4">
         <div className="flex items-center gap-3">
-          <Avatar
-            className="object-cover w-10 h-10 rounded-full"
-            src={`${API_URL}${profilePic}`}
-            alt=""
-          />
+          <Avatar src={`${API_URL}${profilePic}`} alt="" />
           <div>@{username}</div>
         </div>
         <div className="flex justify-between items-center">
@@ -338,14 +318,13 @@ const Postdetail = ({
           </div>
         ) : null}
       </div>
-      {/* {renderComment()} */}
       {commentsFirstRender()}
       {commentsData.length > 5 && commentsCounts == 5 ? (
         <div
           onClick={() => more()}
           className="hover: duration-500 grid justify-center py-2 hover:cursor-pointer"
         >
-          More comments...
+          More...
         </div>
       ) : null}
 
@@ -354,7 +333,7 @@ const Postdetail = ({
           onClick={() => less()}
           className="hover: duration-500 grid justify-center py-2 hover:cursor-pointer"
         >
-          Less comments...
+          Less...
         </div>
       ) : null}
 
