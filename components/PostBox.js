@@ -93,7 +93,7 @@ const PostBox = ({ sendPost, fetchPost }) => {
         className=" p-5 bg-white mt-5 rounded-t-2xl shadow-xl min-w-[45vh] rounded-b-xl"
       >
         <GridItem rowSpan={3} colSpan={1}>
-          {/* leading */}
+          {/* atas */}
           <div className="flex items-center cursor-pointer">
             <Wrap>
               <WrapItem>

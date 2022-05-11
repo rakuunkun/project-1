@@ -151,7 +151,7 @@ export const editProfilePhoto = (values) => {
       dispatch({ type: "LOADING" });
       let token = Cookies.get("token");
 
-      let res2 = await axios.patch(`${API_URL}/photos/`, values, {
+      let res2 = await axios.patch(`${API_URL}/userProfile/addPhotos`, values, {
         headers: {
           authorization: `Bearer ${token}`,
         },

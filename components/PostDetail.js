@@ -201,6 +201,19 @@ const Postdetail = ({
               <div>@{val.username}</div>
             </div>
             <div className="pt-2 text-lg">{val.caption}</div>
+            <div className="pt-5">
+              {" "}
+              {val.image_url ? (
+                <img
+                  className=""
+                  width={300}
+                  height={300}
+                  src={`http://localhost:5000/${val.image_url}`}
+                />
+              ) : (
+                <span />
+              )}
+            </div>
 
             <div className="pt-2 text-lg pr-6"></div>
             <div className="pt-4 flex justify-between items-center h-4">

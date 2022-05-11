@@ -13,6 +13,7 @@ import {
   Text,
   column,
   FormErrorMessage,
+  Flex,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import ButtonDir from "../components/button";

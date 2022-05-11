@@ -22,7 +22,15 @@ import React, { useState } from "react";
 // import moment from "moment";
 import Link from "next/link";
 
-const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
+const Profile = ({
+  username,
+  fullname,
+  bio,
+  profilePic,
+  editProfile,
+  editProfilePhoto,
+  email,
+}) => {
   const router = useRouter();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,14 +46,13 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
     filePreview: null,
   });
 
-  const [scrollBehavior, setScrollBehavior] = React.useState("inside");
-
   const [isActive, setActive] = useState(true);
   const formik = useFormik({
     initialValues: {
       fullname: fullname,
       username: username,
       bio: bio,
+      email: email,
     },
 
     validationSchema: Yup.object({
@@ -108,7 +115,6 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
       });
     }
   };
-  Avatar;
   return (
     <div className="flex flex-col">
       <div className="p-5 bg-white mt-5 rounded-t-2xl shadow-xl min-w-[45vh] ">
@@ -137,6 +143,7 @@ const Profile = ({ username, fullname, bio, profilePic, editProfile }) => {
         </div>
         <div className="pt-2">{fullname}</div>
         <div className="pt-2">{bio}</div>
+        <div className="pt-2">{email}</div>
       </div>
 
       {/* profpic modal  */}

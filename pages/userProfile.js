@@ -57,7 +57,7 @@ export default function userProfile() {
         </VStack>
       </main>
       <div className="flex align-middle justify-center ">
-        <Post data={data} />
+        {/* <Post data={data} /> */}
       </div>
     </div>
   );
